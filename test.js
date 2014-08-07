@@ -2,7 +2,13 @@
 context = describe;
 
 parseString = function(string){
-	return string;
+	var newString = "";
+	if (string.indexOf("(AT)") > -1) {
+		newString = string.replace("(AT)", "@");
+	} else {
+		newString = string;
+	}
+	return newString;
 }
 
 describe("Email parser", function(){

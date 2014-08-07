@@ -1,6 +1,10 @@
 
 context = describe;
 
+parseString = function(string){
+	return string;
+}
+
 describe("Email parser", function(){
 
 	/*EMAILS:

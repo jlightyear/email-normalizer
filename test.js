@@ -20,7 +20,7 @@ describe("Email parser", function(){
 	I want to send an email to joseluis.estrach@gmail.com*/
 
   it(" returns empty string if it's empty", function(){
-  	//var input_string = "";
+  	var input_string = "";
   	expect(clear_email(input_string)).toBe("");
   });
 

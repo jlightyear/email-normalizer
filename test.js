@@ -1,18 +1,6 @@
 
 context = describe;
 
-detect_email = function(input){
-	if (input.indexOf("(AT)") !== -1){
-		return true;
-	}else{
-		return false;
-	}
-}
-
-clear_email = function(input){
-	return input;
-}
-
 describe("Email parser", function(){
 
 	/*EMAILS:
@@ -28,17 +16,7 @@ describe("Email parser", function(){
 	I want to send an email to joseluis.estrach@gmail.com*/
 
   it(" returns empty string if it's empty", function(){
-  	var input_string = "";
-  	expect(clear_email(input_string)).toBe("");
-  });
-
-  it(" returns the same string if there is no email", function(){
-    var input_string = "AT"
-    expect(clear_email(input_string)).toBe("AT");
-  });
-
-  it(" returns true is the email is detected", function(){
-  	var input_string = "joseluis.estrach(AT)gmail.com";
-  	expect(detect_email(input_string)).toBeTruthy();
+  	var string = "";
+  	expect(parseString(string)).toBe("");
   });
 })

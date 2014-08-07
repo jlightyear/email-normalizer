@@ -26,7 +26,7 @@ describe("Email parser", function(){
 
   it(" return the same string that the input", function(){
   	var string = "Elena";
-  	expect(parseString(string)).toBe("");
+  	expect(parseString(string)).toBe("Elena");
   });
 
 })

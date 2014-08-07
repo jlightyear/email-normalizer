@@ -43,7 +43,11 @@ describe("Email parser", function(){
       expect(parseString("      (AT)")).toBe("      (AT)");
   });
 
-  it("return the parsed string if it contains . after the (AT)", function(){
+  it("returns the current string if it not finds a dot", function() {
+  		expect(parseString("a(AT)a")).toBe("a(AT)a");
+  })
+
+  xit("return the parsed string if it contains . after the (AT)", function(){
   	expect(parseString("com.a(AT)a")).toBe("com.a(AT)a");
   })
 

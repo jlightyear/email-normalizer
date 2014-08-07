@@ -29,4 +29,9 @@ describe("Email parser", function(){
   	expect(parseString(string)).toBe("Elena");
   });
 
+  it("return the parsed string if it contains (AT)", function(){
+  	var string = "a(AT)a"
+  	expect(parseString(string)).toBe("a@a");
+  });
+
 })

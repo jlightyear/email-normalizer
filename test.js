@@ -2,7 +2,11 @@
 context = describe;
 
 detect_email = function(input){
-	//return input.contains("(AT)");
+	if (input.indexOf("(AT)") !== -1){
+		return true;
+	}else{
+		return false;
+	}
 }
 
 clear_email = function(input){

@@ -3,8 +3,9 @@ context = describe;
 
 parseString = function(paragraph){
 	var newParagraph = paragraph.trim();
-	var index = newParagraph.index("(AT)");
-	if ((index > 0) && (newParagraph.indexOf('.',index))) {
+	var indexAT = newParagraph.indexOf("(AT)");
+	var indexDOT = newParagraph.indexOf(".",indexAT);
+	if ((indexAT > 0) && (indexDOT > 0)) {
 		return paragraph.replace("(AT)", "@");
 	}
 
@@ -44,7 +45,7 @@ describe("Email parser", function(){
       expect(parseString("      (AT)")).toBe("      (AT)");
   });
 
-  xit("returns the current string if it not finds a dot", function() {
+  it("returns the current string if it not finds a dot", function() {
   		expect(parseString("a(AT)a")).toBe("a(AT)a");
   })
 
@@ -52,7 +53,7 @@ describe("Email parser", function(){
   	expect(parseString("com.a(AT)a")).toBe("com.a(AT)a");
   })
 
-  it("return the parsed string if it contains a dot before the (AT) followed by another dot" , function() {
+  xit("return the parsed string if it contains a dot before the (AT) followed by another dot" , function() {
   	expect(parseString("pepe.rodriguez(AT)gmail.com")).toBe("pepe.rodriguez@gmail.com");
   })
 

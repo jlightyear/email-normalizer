@@ -1,6 +1,10 @@
 
 context = describe;
 
+detect_email = function(input){
+	//return input.contains("(AT)");
+}
+
 clear_email = function(input){
 	return input;
 }
@@ -27,5 +31,10 @@ describe("Email parser", function(){
   it(" returns the same string if there is no email", function(){
     var input_string = "AT"
     expect(clear_email(input_string)).toBe("AT");
+  });
+
+  it(" returns true is the email is detected", function(){
+  	var input_string = "joseluis.estrach(AT)gmail.com";
+  	expect(detect_email(input_string)).toBeTruthy();
   });
 })

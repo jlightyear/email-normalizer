@@ -2,7 +2,7 @@
 context = describe;
 
 parseString = function(paragraph){
-	newParagraph = paragraph.split;
+	var newParagraph = paragraph.trim();
 	if (newParagraph.indexOf("(AT)") > 0) {
 		return paragraph.replace("(AT)", "@");
 	}
@@ -43,8 +43,8 @@ describe("Email parser", function(){
       expect(parseString("      (AT)")).toBe("      (AT)");
   });
 
-  it("separete words to find special characters", function(){
-      expect(parseString("pepe (AT)")).toBe("pepe (AT)");
-  });
+  it("return the parsed string if it contains . after the (AT)", function(){
+  	expect(parseString("com.a(AT)a")).toBe("com.a(AT)a");
+  })
 
 })

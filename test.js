@@ -19,8 +19,14 @@ describe("Email parser", function(){
 	OUTPUT:
 	I want to send an email to joseluis.estrach@gmail.com*/
 
-  it(" returns empty string if it's empty", function(){
+  it(" return empty string if it's empty", function(){
   	var string = "";
   	expect(parseString(string)).toBe("");
   });
+
+  it(" return the same string that the input", function(){
+  	var string = "Elena";
+  	expect(parseString(string)).toBe("");
+  });
+
 })

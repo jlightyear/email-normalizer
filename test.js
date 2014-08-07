@@ -1,14 +1,13 @@
 
 context = describe;
 
-parseString = function(string){
-	var newString = "";
-	if (string.indexOf("(AT)") > -1) {
-		newString = string.replace("(AT)", "@");
-	} else {
-		newString = string;
+parseString = function(paragraph){
+	newParagraph = paragraph.split;
+	if (newParagraph.indexOf("(AT)") > 0) {
+		return paragraph.replace("(AT)", "@");
 	}
-	return newString;
+
+	return paragraph;
 }
 
 describe("Email parser", function(){
@@ -36,8 +35,16 @@ describe("Email parser", function(){
   });
 
   it("return the parsed string if it contains (AT)", function(){
-  	var string = "a(AT)a"
-  	expect(parseString(string)).toBe("a@a");
+  	var string = "a(AT)a.com"
+  	expect(parseString(string)).toBe("a@a.com");
+  });
+
+  it("ignores trailing spaces", function(){
+      expect(parseString("      (AT)")).toBe("      (AT)");
+  });
+
+  it("separete words to find special characters", function(){
+      expect(parseString("pepe (AT)")).toBe("pepe (AT)");
   });
 
 })

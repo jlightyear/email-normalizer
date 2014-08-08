@@ -17,6 +17,7 @@
   -->
 
   <!-- include spec files here... -->
+  <script type="text/javascript" src="normalize_mail.js" data-cover></script>
   <script type="text/javascript" src="test.js" data-cover></script>
 
   <script type="text/javascript">
@@ -56,5 +57,22 @@
    <button id="testing-button">Testing</button>
 </div>
 
+Type in your text:
+<textarea id="input-text"></textarea>
+<button id="clean-button">Clean</button>
+<br />
+There you go:
+<div id="cleaned-text"></div>
 </body>
+<script>
+  var inputBox = $("#input-text");
+  var text = inputBox.val();
+  var resultBox = $("#cleaned-text");
+
+  button = document.getElementById("clean-button");
+  button.addEventListener("click", function(){
+    var output = parseEmailsIn(inputBox.val());
+    resultBox.html(output);
+  });
+</script>
 </html>

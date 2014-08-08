@@ -85,5 +85,9 @@ describe("Parse email in the text", function(){
     expect(parseEmailsInText("pepe.rodriguez(AT)gmail.com")).toBe("pepe.rodriguez@gmail.com");
   })
 
+  it("returns the same string when there are 2 ATs", function(){
+    expect(parseEmailsInText("com(AT)DOTa(AT)a")).toBe("com(AT)DOTa(AT)a");
+  })
+
 
 })

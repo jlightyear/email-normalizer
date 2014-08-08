@@ -1,12 +1,36 @@
 
 context = describe;
 
+changingSymbols = function(newParagraph){
+  var result = "";
+  var symbols = {
+    '(AT)': '@',
+    'DOT': '.',
+    '-AT-': '@'
+  }
+
+  for (var k in symbols){
+    result = newParagraph.replace(k, symbols[k]);
+  }
+
+  return result;
+}
+
+thereIsAnAT = function(newParagraph){
+  return newParagraph.indexOf("@");
+}
+
+thereIsaDOT = function(newParagraph, indexAT){
+  return newParagraph.indexOf(".",indexAT);
+}
+
 parseString = function(paragraph){
 	var newParagraph = paragraph.trim();
-	var indexAT = newParagraph.indexOf("(AT)");
-	var indexDOT = newParagraph.indexOf(".",indexAT);
+  newParagraph = changingSymbols(newParagraph);
+	var indexAT = thereIsAnAT(newParagraph);
+	var indexDOT = thereIsaDOT(newParagraph, indexAT);
 	if ((indexAT > 0) && (indexDOT > 0)) {
-		return paragraph.replace("(AT)", "@");
+		return newParagraph;
 	}
 
 	return paragraph;
@@ -53,8 +77,12 @@ describe("Email parser", function(){
   	expect(parseString("com.a(AT)a")).toBe("com.a(AT)a");
   })
 
-  xit("return the parsed string if it contains a dot before the (AT) followed by another dot" , function() {
+  it("return the parsed string if it contains a dot before the (AT) followed by another dot" , function() {
   	expect(parseString("pepe.rodriguez(AT)gmail.com")).toBe("pepe.rodriguez@gmail.com");
+  })
+
+  it("return the parsed string if it contains a DOT" , function() {
+    expect(parseString("pepe.rodriguez(AT)gmailDOTcom")).toBe("pepe.rodriguez@gmail.com");
   })
 
 })

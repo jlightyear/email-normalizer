@@ -1,8 +1,8 @@
 
 context = describe;
 
-changingSymbols = function(newParagraph){
-  var result = "";
+replaceATandDOT = function(newParagraph){
+  var result = newParagraph;
   var symbols = {
     '(AT)': '@',
     'DOT': '.',
@@ -10,7 +10,7 @@ changingSymbols = function(newParagraph){
   }
 
   for (var k in symbols){
-    result = newParagraph.replace(k, symbols[k]);
+    result = result.replace(k, symbols[k]);
   }
 
   return result;
@@ -20,23 +20,23 @@ thereIsAnAT = function(newParagraph){
   return newParagraph.indexOf("@");
 }
 
-thereIsaDOT = function(newParagraph, indexAT){
+thereIsaDOTafterAT = function(newParagraph, indexAT){
   return newParagraph.indexOf(".",indexAT);
 }
 
-parseString = function(paragraph){
+parseEmailsInText = function(paragraph){
 	var newParagraph = paragraph.trim();
-  newParagraph = changingSymbols(newParagraph);
-	var indexAT = thereIsAnAT(newParagraph);
-	var indexDOT = thereIsaDOT(newParagraph, indexAT);
+  var changedParagraph = replaceATandDOT(newParagraph);
+	var indexAT = thereIsAnAT(changedParagraph);
+	var indexDOT = thereIsaDOTafterAT(changedParagraph, indexAT);
 	if ((indexAT > 0) && (indexDOT > 0)) {
-		return newParagraph;
+		return changedParagraph;
 	}
 
 	return paragraph;
 }
 
-describe("Email parser", function(){
+describe("Parse email in the text", function(){
 
 	/*EMAILS:
 
@@ -50,39 +50,40 @@ describe("Email parser", function(){
 	OUTPUT:
 	I want to send an email to joseluis.estrach@gmail.com*/
 
-  it(" return empty string if it's empty", function(){
+  it("returns an empty string when the input text is empty", function(){
   	var string = "";
-  	expect(parseString(string)).toBe("");
+  	expect(parseEmailsInText(string)).toBe("");
   });
 
-  it(" return the same string that the input", function(){
+  it("returns the same string when the input text doesn't contain an email", function(){
   	var string = "Elena";
-  	expect(parseString(string)).toBe("Elena");
+  	expect(parseEmailsInText(string)).toBe("Elena");
   });
 
-  it("return the parsed string if it contains (AT)", function(){
+  it("returns the parsed string when the input text contains (AT)", function(){
   	var string = "a(AT)a.com"
-  	expect(parseString(string)).toBe("a@a.com");
+  	expect(parseEmailsInText(string)).toBe("a@a.com");
   });
 
-  it("ignores trailing spaces", function(){
-      expect(parseString("      (AT)")).toBe("      (AT)");
+  it("returns the parsed string when the input text contains a DOT" , function() {
+    expect(parseEmailsInText("pepe.rodriguez(AT)gmailDOTcom")).toBe("pepe.rodriguez@gmail.com");
+  })
+
+  it("ignores trailing spaces in the input text", function(){
+      expect(parseEmailsInText("      (AT)")).toBe("      (AT)");
   });
 
-  it("returns the current string if it not finds a dot", function() {
-  		expect(parseString("a(AT)a")).toBe("a(AT)a");
+  it("returns the same string when doesn't find a dot in the input text", function() {
+      expect(parseEmailsInText("a(AT)a")).toBe("a(AT)a");
   })
 
-  it("return the current string if it doesn't contain a . after the (AT)", function(){
-  	expect(parseString("com.a(AT)a")).toBe("com.a(AT)a");
+  it("returns the same string when it doesn't contain a DOT after the AT", function(){
+    expect(parseEmailsInText("comDOTa(AT)a")).toBe("comDOTa(AT)a");
   })
 
-  it("return the parsed string if it contains a dot before the (AT) followed by another dot" , function() {
-  	expect(parseString("pepe.rodriguez(AT)gmail.com")).toBe("pepe.rodriguez@gmail.com");
+  it("returns the parsed string when it contains a DOT before the (AT) followed by another DOT" , function() {
+    expect(parseEmailsInText("pepe.rodriguez(AT)gmail.com")).toBe("pepe.rodriguez@gmail.com");
   })
 
-  it("return the parsed string if it contains a DOT" , function() {
-    expect(parseString("pepe.rodriguez(AT)gmailDOTcom")).toBe("pepe.rodriguez@gmail.com");
-  })
 
 })

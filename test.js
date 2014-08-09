@@ -45,7 +45,7 @@ describe("Parse email in the text", function(){
     expect(parseEmailsIn("comDOTa(AT)a")).toBe("comDOTa(AT)a");
   })
 
-  it("returns the same string when it contains two DOTs next", function(){
+  it("returns the same string when it contains a DOT followed by other DOT", function(){
     expect(parseEmailsIn("comDOTa(AT)a..com")).toBe("comDOTa(AT)a..com");
   })
 

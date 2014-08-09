@@ -23,8 +23,15 @@ function thereIsaDOTafterAT(newParagraph, indexAT){
   return newParagraph.indexOf(".",indexAT);
 };
 
+function thereAreDOTfollowedDOT(newParagraph){
+  if(newParagraph.indexOf("..") != -1){
+    return false;
+  }
+  return true;
+}
+
 function thereAreMoreATs(newParagraph){
-  if (newParagraph.indexOf("@") != newParagraph.lastIndexOf("@")){
+  if(newParagraph.indexOf("@") != newParagraph.lastIndexOf("@")){
     return false;
   }
   return true;
@@ -44,9 +51,10 @@ function parseEmailsIn(paragraph){
     var changedParagraph = replaceATandDOT(textValue);
     var indexAT = thereIsAnAT(changedParagraph);
     var indexDOT = thereIsaDOTafterAT(changedParagraph, indexAT);
+    var DOTsTogether = thereAreDOTfollowedDOT(changedParagraph);
     var moreATs = thereAreMoreATs(changedParagraph);
     var DOTatEND = thereIsaDOTatEND(changedParagraph);
-    if ((indexAT > 0) && (indexDOT > 0) && (moreATs) && (DOTatEND)) {
+    if ((indexAT > 0) && (indexDOT > 0) && (moreATs) && (DOTatEND) && (DOTsTogether)) {
       newParagraphParsed += changedParagraph + " ";
     }
     else{

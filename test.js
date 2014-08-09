@@ -34,11 +34,11 @@ describe("Parse email in the text", function(){
   })
 
   it("ignores trailing spaces in the input text", function(){
-      expect(parseEmailsIn("      (AT)")).toBe("      (AT)");
+    expect(parseEmailsIn("      (AT)")).toBe("      (AT)");
   });
 
   it("returns the same string when doesn't find a dot in the input text", function() {
-      expect(parseEmailsIn("a(AT)a")).toBe("a(AT)a");
+    expect(parseEmailsIn("a(AT)a")).toBe("a(AT)a");
   })
 
   it("returns the same string when it doesn't contain a DOT after the AT", function(){
@@ -49,7 +49,7 @@ describe("Parse email in the text", function(){
     expect(parseEmailsIn("pepe.rodriguez(AT)gmail.com")).toBe("pepe.rodriguez@gmail.com");
   })
 
-  xit("returns the same string when there are 2 ATs", function(){
+  it("returns the same string when there are more than one AT", function(){
     expect(parseEmailsIn("com(AT)DOTa(AT)a")).toBe("com(AT)DOTa(AT)a");
   })
 

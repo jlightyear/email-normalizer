@@ -56,6 +56,10 @@ describe("Parse email in the text", function(){
   it("returns the same string when the DOT is at the end of the text", function(){
     expect(parseEmailsIn("comDOTa(AT)aDOT")).toBe("comDOTa(AT)aDOT");
   })
+
+  it("returns two parsed emails in the text", function(){
+    expect(parseEmailsIn("pepeDOTa(AT)aDOTcom pedro(AT)aDOTcom")).toBe("pepe.a@a.com pedro@a.com");
+  })
 })
 
 describe("Testing the DOM", function(){

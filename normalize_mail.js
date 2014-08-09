@@ -35,7 +35,9 @@ function thereIsaDOTatEND(newParagraph){
     return false;
   }
   return true;
-}
+};
+
+
 
 function parseEmailsIn(paragraph){
 	var newParagraph = paragraph.trim();

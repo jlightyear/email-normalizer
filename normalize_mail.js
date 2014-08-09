@@ -37,18 +37,22 @@ function thereIsaDOTatEND(newParagraph){
   return true;
 };
 
-
-
 function parseEmailsIn(paragraph){
-	var newParagraph = paragraph.trim();
-  var changedParagraph = replaceATandDOT(newParagraph);
-	var indexAT = thereIsAnAT(changedParagraph);
-	var indexDOT = thereIsaDOTafterAT(changedParagraph, indexAT);
-  var moreATs = thereAreMoreATs(changedParagraph);
-  var DOTatEND = thereIsaDOTatEND(changedParagraph);
-	if ((indexAT > 0) && (indexDOT > 0) && (moreATs) && (DOTatEND)) {
-		return changedParagraph;
-	}
+  var newParagraphParsed = "";
+	var newParagraph = paragraph.split(" ");
+  newParagraph.forEach(function(textValue,position){
+    var changedParagraph = replaceATandDOT(textValue);
+    var indexAT = thereIsAnAT(changedParagraph);
+    var indexDOT = thereIsaDOTafterAT(changedParagraph, indexAT);
+    var moreATs = thereAreMoreATs(changedParagraph);
+    var DOTatEND = thereIsaDOTatEND(changedParagraph);
+    if ((indexAT > 0) && (indexDOT > 0) && (moreATs) && (DOTatEND)) {
+      newParagraphParsed += changedParagraph + " ";
+    }
+    else{
+      newParagraphParsed += textValue + " ";
+    }
+  })
 
-	return paragraph;
+	return newParagraphParsed.trim();
 };

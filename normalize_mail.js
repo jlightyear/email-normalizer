@@ -30,13 +30,21 @@ function thereAreMoreATs(newParagraph){
   return true;
 };
 
+function thereIsaDOTatEND(newParagraph){
+  if (newParagraph.lastIndexOf(".") == newParagraph.length-1){
+    return false;
+  }
+  return true;
+}
+
 function parseEmailsIn(paragraph){
 	var newParagraph = paragraph.trim();
   var changedParagraph = replaceATandDOT(newParagraph);
 	var indexAT = thereIsAnAT(changedParagraph);
 	var indexDOT = thereIsaDOTafterAT(changedParagraph, indexAT);
   var moreATs = thereAreMoreATs(changedParagraph);
-	if ((indexAT > 0) && (indexDOT > 0) && (moreATs)) {
+  var DOTatEND = thereIsaDOTatEND(changedParagraph);
+	if ((indexAT > 0) && (indexDOT > 0) && (moreATs) && (DOTatEND)) {
 		return changedParagraph;
 	}
 

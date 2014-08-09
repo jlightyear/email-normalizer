@@ -14,22 +14,22 @@ describe("Parse email in the text", function(){
 	OUTPUT:
 	I want to send an email to joseluis.estrach@gmail.com*/
 
-  xit("returns an empty string when the input text is empty", function(){
+  it("returns an empty string when the input text is empty", function(){
   	var string = "";
   	expect(parseEmailsIn(string)).toBe("");
   });
 
-  xit("returns the same string when the input text doesn't contain an email", function(){
+  it("returns the same string when the input text doesn't contain an email", function(){
   	var string = "Elena";
   	expect(parseEmailsIn(string)).toBe("Elena");
   });
 
-  xit("returns the parsed string when the input text contains (AT)", function(){
+  it("returns the parsed string when the input text contains (AT)", function(){
   	var string = "a(AT)a.com"
   	expect(parseEmailsIn(string)).toBe("a@a.com");
   });
 
-  xit("returns the parsed string when the input text contains a DOT" , function() {
+  it("returns the parsed string when the input text contains a DOT" , function() {
     expect(parseEmailsIn("pepe.rodriguez(AT)gmailDOTcom")).toBe("pepe.rodriguez@gmail.com");
   })
 
@@ -37,23 +37,27 @@ describe("Parse email in the text", function(){
     expect(parseEmailsIn("      (AT)")).toBe("      (AT)");
   });
 
-  xit("returns the same string when doesn't find a dot in the input text", function() {
+  it("returns the same string when doesn't find a dot in the input text", function() {
     expect(parseEmailsIn("a(AT)a")).toBe("a(AT)a");
   })
 
-  xit("returns the same string when it doesn't contain a DOT after the AT", function(){
+  it("returns the same string when it doesn't contain a DOT after the AT", function(){
     expect(parseEmailsIn("comDOTa(AT)a")).toBe("comDOTa(AT)a");
   })
 
-  xit("returns the parsed string when it contains a DOT before the (AT) followed by another DOT" , function() {
+  it("returns the same string when it contains two DOTs next", function(){
+    expect(parseEmailsIn("comDOTa(AT)a..com")).toBe("comDOTa(AT)a..com");
+  })
+
+  it("returns the parsed string when it contains a DOT before the (AT) followed by another DOT" , function() {
     expect(parseEmailsIn("pepe.rodriguez(AT)gmail.com")).toBe("pepe.rodriguez@gmail.com");
   })
 
-  xit("returns the same string when there are more than one AT", function(){
+  it("returns the same string when there are more than one AT", function(){
     expect(parseEmailsIn("com(AT)DOTa(AT)a")).toBe("com(AT)DOTa(AT)a");
   })
 
-  xit("returns the same string when the DOT is at the end of the text", function(){
+  it("returns the same string when the DOT is at the end of the text", function(){
     expect(parseEmailsIn("comDOTa(AT)aDOT")).toBe("comDOTa(AT)aDOT");
   })
 

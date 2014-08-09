@@ -53,6 +53,9 @@ describe("Parse email in the text", function(){
     expect(parseEmailsIn("com(AT)DOTa(AT)a")).toBe("com(AT)DOTa(AT)a");
   })
 
+  it("returns the same string when the DOT is at the end of the text", function(){
+    expect(parseEmailsIn("comDOTa(AT)aDOT")).toBe("comDOTa(AT)aDOT");
+  })
 })
 
 describe("Testing the DOM", function(){
